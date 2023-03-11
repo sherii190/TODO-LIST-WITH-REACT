@@ -1,4 +1,9 @@
 {
   "header": "Todo List",
-  "_header.comment" : "This string is for header"
+  "_header.comment" : "This string is for header",
+  "pivots" : {
+    "tasksTab": "Tasks",
+    "taskFormTab": "Task Form",
+    "compleatedTaskTab": "Completed"
+  }
 }

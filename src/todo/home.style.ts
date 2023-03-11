@@ -4,6 +4,7 @@ import { IProcessedStyleSet, IStyle } from "@fluentui/react/lib/Styling"
 interface IHomeStyle{
   todoContainer: IStyle
   headerStyle: IStyle
+  pivotRoot: IStyle
 }
 
 const HomeStyle: IProcessedStyleSet<IHomeStyle> = mergeStyleSets({
@@ -25,6 +26,10 @@ const HomeStyle: IProcessedStyleSet<IHomeStyle> = mergeStyleSets({
     alignItems: "center",
     color: "white",
 
+  },
+  pivotRoot: {
+    display: "flex",
+    justifyContent: "center"
   }
 })
 
