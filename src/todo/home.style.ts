@@ -5,6 +5,7 @@ interface IHomeStyle{
   todoContainer: IStyle
   headerStyle: IStyle
   pivotRoot: IStyle
+  pivotContainer: IStyle
 }
 
 const HomeStyle: IProcessedStyleSet<IHomeStyle> = mergeStyleSets({
@@ -30,7 +31,11 @@ const HomeStyle: IProcessedStyleSet<IHomeStyle> = mergeStyleSets({
   pivotRoot: {
     display: "flex",
     justifyContent: "center"
+  },
+  pivotContainer: {
+    margin: "20",
   }
+
 })
 
 

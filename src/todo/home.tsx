@@ -12,14 +12,15 @@ const Home = () => {
     <header className={HomeStyle.headerStyle}>
       <h2>{todoString.header}</h2>
     </header>
-    
-    <Pivot
-      selectedKey={String(selectedKey)}
-      styles={{ root: HomeStyle.pivotRoot }}
-      onLinkClick= {(item?: PivotItem) => {
-        setSelectedKey(item?.props.itemKey || PivotKeysEnum.tasks);
-      }}
-     >
+
+    <div className={HomeStyle.pivotContainer}>
+      <Pivot
+        selectedKey={String(selectedKey)}
+        styles={{ root: HomeStyle.pivotRoot }}
+        onLinkClick={(item?: PivotItem) => {
+          setSelectedKey(item?.props.itemKey || PivotKeysEnum.tasks);
+        }}
+      >
         <PivotItem headerText={todoString.pivots.tasksTab} itemKey={PivotKeysEnum.tasks}>
           <Label>Pivot #1</Label>
         </PivotItem>
@@ -30,6 +31,7 @@ const Home = () => {
           <Label>Pivot #3</Label>
         </PivotItem>
       </Pivot>
+    </div>
   </div>
 };
 
