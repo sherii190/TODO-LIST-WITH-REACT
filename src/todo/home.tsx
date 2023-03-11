@@ -1,11 +1,8 @@
 import React from 'react';
+import HomeStyle from './home.style';
 
-const home = () => {
-  return (
-    <div>
-      This is home page!
-    </div>
-  );
+const Home = () => {
+  return <div className={HomeStyle.todoContainer}>This is home page</div>
 };
 
-export default home;
+export default Home;
