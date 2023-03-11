@@ -5,6 +5,7 @@ import TaskListStyle from './taskList.style';
 interface ITask {
   id: string;
   title: string,
+  isFave: boolean,
 }
 
 const taskList = () => {
@@ -12,10 +13,12 @@ const taskList = () => {
     {
       id: "1",
       title: "Task 1",
+      isFave: true, 
     },
     {
       id: "2",
       title: "Task 2",
+      isFave: false, 
     },
   ];
 
@@ -27,7 +30,11 @@ const taskList = () => {
           {task.title}
         </Stack>
         <Stack horizontal style={{width : "15%"}}>
-          <FontIcon iconName="CompassNW" className={TaskListStyle.iconStyle} />
+          <FontIcon iconName="Info" className={TaskListStyle.iconStyle} />
+          <FontIcon iconName={task.isFave ? "FavoriteStarFill" : "FavoriteStar"} className={TaskListStyle.iconStyle} />
+          <FontIcon iconName="EditNote" className={TaskListStyle.iconStyle} />
+          <FontIcon iconName="Delete" className={TaskListStyle.iconStyle} />
+          
         </Stack>
       </Stack>
     );
