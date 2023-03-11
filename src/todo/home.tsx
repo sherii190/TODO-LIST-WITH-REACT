@@ -1,4 +1,4 @@
-import { Label, Pivot, PivotItem } from '@fluentui/react';
+import { Label, Pivot, PivotItem, Stack } from '@fluentui/react';
 import React, { useState } from 'react';
 import HomeStyle from './home.style';
 import todoString from './string.json';
@@ -8,12 +8,12 @@ const Home = () => {
 
   const [selectedKey, setSelectedKey] = useState<string>(PivotKeysEnum.tasks);
 
-  return <div className={HomeStyle.todoContainer}>
+  return <Stack className={HomeStyle.todoContainer}>
     <header className={HomeStyle.headerStyle}>
       <h2>{todoString.header}</h2>
     </header>
 
-    <div className={HomeStyle.pivotContainer}>
+    <Stack className={HomeStyle.pivotContainer}>
       <Pivot
         selectedKey={String(selectedKey)}
         styles={{ root: HomeStyle.pivotRoot }}
@@ -31,8 +31,8 @@ const Home = () => {
           <Label>Pivot #3</Label>
         </PivotItem>
       </Pivot>
-    </div>
-  </div>
+    </Stack>
+  </Stack>
 };
 
 export default Home;
