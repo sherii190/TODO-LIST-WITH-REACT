@@ -33,7 +33,7 @@ const HomeStyle: IProcessedStyleSet<IHomeStyle> = mergeStyleSets({
     justifyContent: "center"
   },
   pivotContainer: {
-    margin: "20",
+    margin: 20,
   }
 
 })
