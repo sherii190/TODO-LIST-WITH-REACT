@@ -1,4 +1,5 @@
 import React from 'react';
+import TaskListStyle from './taskList.style';
 
 interface ITask {
   id: string;
@@ -18,7 +19,7 @@ const taskList = () => {
   ];
 
   const onRenderCell = (task: ITask) => {
-    return <div key={task.id}>{task.title}</div>
+    return <div key={task.id} className={TaskListStyle.taskItem}>{task.title}</div>
   }
   return <div>
     {tasks.map((onRenderCell))}
