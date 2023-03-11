@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import HomeStyle from './home.style';
 import todoString from './string.json';
 import { PivotKeysEnum } from './types';
+import TaskList from './list/taskList';
 
 const Home = () => {
 
@@ -22,7 +23,7 @@ const Home = () => {
         }}
       >
         <PivotItem headerText={todoString.pivots.tasksTab} itemKey={PivotKeysEnum.tasks}>
-          <Label>Pivot #1</Label>
+          <TaskList/>
         </PivotItem>
         <PivotItem headerText={todoString.pivots.taskFormTab} itemKey={PivotKeysEnum.taskForm}>
           <Label>Pivot #2</Label>
