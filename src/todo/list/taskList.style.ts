@@ -1,8 +1,9 @@
 import { IProcessedStyleSet, IStyle, mergeStyleSets } from "@fluentui/react";
 
 interface ITaskListStyle {
-  taskItem: IStyle
-  iconStyle: IStyle
+  taskItem: IStyle;
+  iconStyle: IStyle;
+  disabled: IStyle;
 }
 
 const TaskListStyle: IProcessedStyleSet<ITaskListStyle> = mergeStyleSets({
@@ -28,6 +29,12 @@ const TaskListStyle: IProcessedStyleSet<ITaskListStyle> = mergeStyleSets({
       "&:hover": { cursor: "pointer" },
     },
   },
+  disabled: {
+    color: "gray",
+    selectors: {
+      "&:hover": { cursor: "default" },
+    },
+  }
 
 })
 

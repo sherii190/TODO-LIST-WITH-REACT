@@ -4,6 +4,7 @@ import { TodoContext } from "../todoProvider";
 import { ActionTypeEnum, ITask } from "../types";
 import TaskListStyle from "./taskList.style";
 import todoString from "../string.json";
+import TaskDescription from "./taskDescription";
 
 const TaskList = () => {
   const { activeTasks, dispatch } = useContext(TodoContext);
@@ -26,7 +27,7 @@ const TaskList = () => {
           {task.title}
         </Stack>
         <Stack horizontal style={{ width: "15%" }}>
-          <FontIcon iconName="Info" className={TaskListStyle.iconStyle} />
+          <TaskDescription task={task} />
           <FontIcon
             iconName={task.isFave ? "FavoriteStarFill" : "FavoriteStar"}
             className={
