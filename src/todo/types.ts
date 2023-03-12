@@ -26,7 +26,14 @@ export enum ActionTypeEnum {
   delete,
 }
 
+export type IReducerAction = IAddAction | IDeleteAction
+
 export interface IAddAction {
   type: ActionTypeEnum.add;
   data: ITask;
+}
+
+export interface IDeleteAction {
+  type: ActionTypeEnum.delete;
+  data: { id: string };
 }

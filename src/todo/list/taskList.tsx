@@ -3,12 +3,15 @@ import React, { useContext } from "react";
 import { TodoContext } from "../todoProvider";
 import { ActionTypeEnum, ITask } from "../types";
 import TaskListStyle from "./taskList.style";
+import todoString from '../string.json'
 
 const TaskList = () => {
   const { activeTasks, dispatch } = useContext(TodoContext);
 
   const onTaskDelete = (id: string) => {
-    dispatch({ type: ActionTypeEnum.delete, data: { id } });
+    if (window.confirm(todoString.deleteConfirm)) {
+      dispatch({ type: ActionTypeEnum.delete, data: { id } });
+    }
   };
   const onRenderCell = (task: ITask) => {
     return (
@@ -27,7 +30,7 @@ const TaskList = () => {
           <FontIcon
             iconName="Delete"
             className={TaskListStyle.iconStyle}
-            onClick={onTaskDelete}
+            onClick={() => onTaskDelete(task.id)}
           />
         </Stack>
       </Stack>
