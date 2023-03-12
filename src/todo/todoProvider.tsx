@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import { ITask, ITodoContext, ITodoState } from "./types";
+import { ActionTypeEnum, IAddAction, ITask, ITodoContext, ITodoState } from "./types";
 
 export const TodoContext = createContext<ITodoContext>({
   activeTasks: [],
@@ -10,11 +10,11 @@ type Props = {
   children: React.ReactNode;
 };
 
-const reducer = (state: ITodoState, action: any) => {
-  console.log(state);
-  console.log(action);
+const reducer = (state: ITodoState, action: IAddAction) => {
   switch (action.type) {
-    case "add":
+    case ActionTypeEnum.add:
+      const { data } = action;
+      data.id = new Date().toJSON();
       return { ...state, activeTasks: [action.data, ...state.activeTasks] };
   }
   return { ...state };

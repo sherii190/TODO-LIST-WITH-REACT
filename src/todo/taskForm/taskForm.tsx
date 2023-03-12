@@ -7,6 +7,7 @@ import {
 } from "@fluentui/react";
 import React, { useContext, useEffect, useState } from "react";
 import { TodoContext } from "../todoProvider";
+import { ActionTypeEnum, ITask } from "../types";
 import useInput from "./useInputs";
 
 const TaskForm = () => {
@@ -29,8 +30,13 @@ const TaskForm = () => {
   const onFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    const data = { title: title.value, description: description.value };
-    dispatch({ type: "add", data });
+    const data: ITask = {
+      id: "",
+      title: title.value,
+      description: description.value,
+      isFave: false,
+    };
+    dispatch({ type: ActionTypeEnum.add, data });
     setShowMessage({ type: MessageBarType.success, message: "Task Added" });
   };
   return (
