@@ -1,9 +1,9 @@
-import { Checkbox, FontIcon, Stack } from "@fluentui/react";
+import { Checkbox, FontIcon, mergeStyles, Stack } from "@fluentui/react";
 import React, { useContext } from "react";
 import { TodoContext } from "../todoProvider";
 import { ActionTypeEnum, ITask } from "../types";
 import TaskListStyle from "./taskList.style";
-import todoString from '../string.json'
+import todoString from "../string.json";
 
 const TaskList = () => {
   const { activeTasks, dispatch } = useContext(TodoContext);
@@ -13,6 +13,11 @@ const TaskList = () => {
       dispatch({ type: ActionTypeEnum.delete, data: { id } });
     }
   };
+
+  const onFavoriteClick = (id: string) => {
+    dispatch({ type: ActionTypeEnum.ToggleFavorite, data: { id } });
+  };
+
   const onRenderCell = (task: ITask) => {
     return (
       <Stack horizontal key={task.id} className={TaskListStyle.taskItem}>
@@ -24,7 +29,12 @@ const TaskList = () => {
           <FontIcon iconName="Info" className={TaskListStyle.iconStyle} />
           <FontIcon
             iconName={task.isFave ? "FavoriteStarFill" : "FavoriteStar"}
-            className={TaskListStyle.iconStyle}
+            className={
+              task.isFave
+                ? mergeStyles(TaskListStyle.iconStyle, { color: "blue" })
+                : TaskListStyle.iconStyle
+            }
+            onClick={() => onFavoriteClick(task.id)}
           />
           <FontIcon iconName="EditNote" className={TaskListStyle.iconStyle} />
           <FontIcon

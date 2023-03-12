@@ -7,6 +7,7 @@ import {
   ITask,
   ITodoContext,
   ITodoState,
+  IToggleFavoriteAction,
 } from "./types";
 import { clone } from "./utility";
 
@@ -31,12 +32,26 @@ const deleteTaskAction = (state: ITodoState, action: IDeleteAction) => {
   return filteredData;
 };
 
+const toggleFavoriteAction = (
+  state: ITodoState,
+  action: IToggleFavoriteAction
+) => {
+  const cloneActiveTasks: ITask [] = (state.activeTasks);
+  const index = cloneActiveTasks.findIndex(x => x.id === action.data.id);
+  if (index >= 0) {
+    cloneActiveTasks [index].isFave = !cloneActiveTasks [index].isFave
+  }
+  return state.activeTasks;
+};
+
 const reducer = (state: ITodoState, action: IReducerAction) => {
   switch (action.type) {
     case ActionTypeEnum.add:
       return { ...state, activeTasks: addTaskAction(state, action) };
     case ActionTypeEnum.delete:
       return { ...state, activeTasks: deleteTaskAction(state, action) };
+    case ActionTypeEnum.ToggleFavorite:
+      return { ...state, activeTasks: toggleFavoriteAction(state, action) };
   }
   return { ...state };
 };
