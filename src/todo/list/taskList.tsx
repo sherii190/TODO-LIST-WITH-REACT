@@ -6,7 +6,10 @@ import TaskListStyle from "./taskList.style";
 import todoString from "../string.json";
 import TaskDescription from "./taskDescription";
 
-const TaskList = () => {
+type Props = {
+  setEditTask : (taskId : string) => void
+}
+const TaskList = ({setEditTask} : Props) => {
   const { activeTasks, dispatch } = useContext(TodoContext);
 
   const onTaskDelete = (id: string) => {
@@ -37,7 +40,11 @@ const TaskList = () => {
             }
             onClick={() => onFavoriteClick(task.id)}
           />
-          <FontIcon iconName="EditNote" className={TaskListStyle.iconStyle} />
+          <FontIcon iconName="EditNote" className={TaskListStyle.iconStyle}
+            onClick={() => {
+              setEditTask(task.id)
+          }}
+          />
           <FontIcon
             iconName="Delete"
             className={TaskListStyle.iconStyle}

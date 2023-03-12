@@ -10,8 +10,20 @@ import { TodoContext } from "../todoProvider";
 import { ActionTypeEnum, ITask } from "../types";
 import useInput from "./useInputs";
 
-const TaskForm = () => {
+type Props = {
+  editTaskId: string | null;
+}
+
+const TaskForm = ({ editTaskId } : Props) => {
   const { dispatch } = useContext(TodoContext);
+  useEffect(() => {
+    if (editTaskId) {
+
+    }
+    
+}, [editTaskId])
+
+
   const [showMessage, setShowMessage] = useState<{
     type: MessageBarType;
     message: string;
