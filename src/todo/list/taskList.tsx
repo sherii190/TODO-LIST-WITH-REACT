@@ -6,7 +6,7 @@ import TaskListStyle from './taskList.style';
 
 
 
-const taskList = () => {
+const TaskList = () => {
   const { activeTasks } = useContext(TodoContext);
 
   const onRenderCell = (task: ITask) => {
@@ -29,4 +29,4 @@ const taskList = () => {
   return <div>{activeTasks.map((onRenderCell))}</div>;
 };
 
-export default taskList;
+export default TaskList;
