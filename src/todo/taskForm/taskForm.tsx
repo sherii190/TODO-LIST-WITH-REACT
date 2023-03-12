@@ -5,10 +5,12 @@ import {
   Stack,
   TextField,
 } from "@fluentui/react";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { TodoContext } from "../todoProvider";
 import useInput from "./useInputs";
 
 const TaskForm = () => {
+  const { dispatch } = useContext(TodoContext);
   const [showMessage, setShowMessage] = useState<{
     type: MessageBarType;
     message: string;
@@ -19,14 +21,16 @@ const TaskForm = () => {
   useEffect(() => {
     if (showMessage.message) {
       setTimeout(() => {
-    setShowMessage({type: MessageBarType.success, message: ""})
-  }, 1000)
-}
-  }, [showMessage.message])
+        setShowMessage({ type: MessageBarType.success, message: "" });
+      }, 1000);
+    }
+  }, [showMessage.message]);
 
   const onFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
+    const data = { title: title.value, description: description.value };
+    dispatch({ type: "add", data });
     setShowMessage({ type: MessageBarType.success, message: "Task Added" });
   };
   return (
