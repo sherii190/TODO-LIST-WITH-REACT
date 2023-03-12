@@ -2,6 +2,7 @@ import React, { createContext, useReducer } from "react";
 import {
   ActionTypeEnum,
   IAddAction,
+  IDeleteAction,
   IReducerAction,
   ITask,
   ITodoContext,
