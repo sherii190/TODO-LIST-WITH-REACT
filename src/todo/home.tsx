@@ -7,6 +7,7 @@ import { ITask, PivotKeysEnum } from "./types";
 
 import { initializeIcons } from "@fluentui/font-icons-mdl2";
 import TodoProvider from "./todoProvider";
+import TaskForm from "./taskForm/taskForm";
 initializeIcons();
 
 const Home = () => {
@@ -38,7 +39,7 @@ const Home = () => {
               headerText={todoString.pivots.taskFormTab}
               itemKey={PivotKeysEnum.taskForm}
             >
-              <Label>Pivot #2</Label>
+              <TaskForm />
             </PivotItem>
 
             <PivotItem
