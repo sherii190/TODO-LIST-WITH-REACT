@@ -3,3 +3,8 @@ export enum PivotKeysEnum {
   taskForm = "taskForm",
   Completed = "Completedtasks",
 }
+export interface ITask {
+  id: string;
+  title: string,
+  isFave: boolean,
+}

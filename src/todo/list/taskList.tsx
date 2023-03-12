@@ -1,26 +1,15 @@
 import { Checkbox, FontIcon, Stack, } from '@fluentui/react';
-import React from 'react';
+import React, { useContext } from 'react';
+import { todoContext } from '../home';
+import { ITask } from '../types';
 import TaskListStyle from './taskList.style';
 
-interface ITask {
-  id: string;
-  title: string,
-  isFave: boolean,
-}
+
 
 const taskList = () => {
-  const tasks: ITask[] = [
-    {
-      id: "1",
-      title: "Task 1",
-      isFave: true, 
-    },
-    {
-      id: "2",
-      title: "Task 2",
-      isFave: false, 
-    },
-  ];
+  
+  
+  const { activeTasks } = useContext (todoContext);
 
   const onRenderCell = (task: ITask) => {
     return (
@@ -39,7 +28,7 @@ const taskList = () => {
       </Stack>
     );
   }
-  return <div>{tasks.map((onRenderCell))}</div>;
+  return <div>{activeTasks.map((onRenderCell))}</div>;
 };
 
 export default taskList;
