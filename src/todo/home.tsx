@@ -14,6 +14,10 @@ const Home = () => {
   const [selectedKey, setSelectedKey] = useState<string>(PivotKeysEnum.tasks);
   const [editTaskId, setEditTaskId] = useState<string | null>(null);
 
+  const editTask = (id: string) => {
+    setEditTaskId(id)
+    setSelectedKey(PivotKeysEnum.taskForm)
+  }
   return (
     <Stack className={HomeStyle.todoContainer}>
       <TodoProvider>
@@ -33,7 +37,7 @@ const Home = () => {
               headerText={todoString.pivots.tasksTab}
               itemKey={PivotKeysEnum.tasks}
             >
-              <TaskList setEditTask={setEditTaskId} />
+              <TaskList setEditTask={editTask} />
             </PivotItem>
 
             <PivotItem

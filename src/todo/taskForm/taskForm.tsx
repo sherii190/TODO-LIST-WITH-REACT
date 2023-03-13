@@ -11,18 +11,19 @@ import { ActionTypeEnum, ITask } from "../types";
 import useInput from "./useInputs";
 
 type Props = {
-  editTaskId : string | null
-}
+  editTaskId: string | null;
+};
 const TaskForm = ({ editTaskId }: Props) => {
   const { activeTasks, dispatch } = useContext(TodoContext);
-  
+
   const title = useInput("");
   const description = useInput("");
 
-  
   useEffect(() => {
     if (editTaskId) {
-      const taskData = activeTasks.find(task => task.id === editTaskId )
+      const taskData = activeTasks.find((task) => task.id === editTaskId);
+      title.set(taskData?.title || "");
+      description.set(taskData?.description || "");
     }
   }, [editTaskId]);
 
@@ -30,7 +31,7 @@ const TaskForm = ({ editTaskId }: Props) => {
     type: MessageBarType;
     message: string;
   }>({ type: MessageBarType.success, message: "" });
-  
+
   useEffect(() => {
     if (showMessage.message) {
       setTimeout(() => {
