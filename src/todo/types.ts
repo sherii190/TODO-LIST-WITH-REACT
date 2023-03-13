@@ -19,6 +19,7 @@ export interface ITodoContext {
 
 export interface ITodoState {
   activeTasks: ITask[];
+  complettedTasks: ITask[];
 }
 
 export enum ActionTypeEnum {
