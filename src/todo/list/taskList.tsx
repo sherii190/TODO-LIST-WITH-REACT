@@ -7,9 +7,9 @@ import todoString from "../string.json";
 import TaskDescription from "./taskDescription";
 
 type Props = {
-  setEditTask : (taskId : string) => void
-}
-const TaskList = ({setEditTask} : Props) => {
+  setEditTask: (taskId: string) => void;
+};
+const TaskList = ({ setEditTask }: Props) => {
   const { activeTasks, dispatch } = useContext(TodoContext);
 
   const onTaskDelete = (id: string) => {
@@ -22,11 +22,19 @@ const TaskList = ({setEditTask} : Props) => {
     dispatch({ type: ActionTypeEnum.ToggleFavorite, data: { id } });
   };
 
+  const checkboxClickedHnd = (id: string) => {
+    dispatch({ type: ActionTypeEnum.Completed, data: { id } });
+  };
+
   const onRenderCell = (task: ITask) => {
     return (
       <Stack horizontal key={task.id} className={TaskListStyle.taskItem}>
         <Stack horizontal style={{ width: "85%" }}>
-          <Checkbox />
+          <Checkbox
+            onChange={() => {
+              checkboxClickedHnd(task.id);
+            }}
+          />
           {task.title}
         </Stack>
         <Stack horizontal style={{ width: "15%" }}>
@@ -40,10 +48,12 @@ const TaskList = ({setEditTask} : Props) => {
             }
             onClick={() => onFavoriteClick(task.id)}
           />
-          <FontIcon iconName="EditNote" className={TaskListStyle.iconStyle}
+          <FontIcon
+            iconName="EditNote"
+            className={TaskListStyle.iconStyle}
             onClick={() => {
-              setEditTask(task.id)
-          }}
+              setEditTask(task.id);
+            }}
           />
           <FontIcon
             iconName="Delete"

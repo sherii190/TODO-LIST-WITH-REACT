@@ -14,12 +14,13 @@ export interface ITask {
 
 export interface ITodoContext {
   activeTasks: ITask[];
+  completedTasks: ITask[];
   dispatch: React.Dispatch<any>;
 }
 
 export interface ITodoState {
   activeTasks: ITask[];
-  complettedTasks: ITask[];
+  completedTasks: ITask[];
 }
 
 export enum ActionTypeEnum {
@@ -27,9 +28,15 @@ export enum ActionTypeEnum {
   delete,
   ToggleFavorite,
   Update,
+  Completed,
 }
 
-export type IReducerAction = IAddAction | IDeleteAction | IToggleFavoriteAction | IUpdateAction;
+export type IReducerAction =
+  | IAddAction
+  | IDeleteAction
+  | IToggleFavoriteAction
+  | IUpdateAction
+  | ICompletedAction;
 
 export interface IAddAction {
   type: ActionTypeEnum.add;
@@ -49,4 +56,8 @@ export interface IToggleFavoriteAction {
 export interface IUpdateAction {
   type: ActionTypeEnum.Update;
   data: ITask;
+}
+export interface ICompletedAction {
+  type: ActionTypeEnum.Completed;
+  data: { id: string };
 }

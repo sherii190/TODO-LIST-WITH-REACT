@@ -2,6 +2,7 @@ import React, { createContext, useReducer } from "react";
 import {
   ActionTypeEnum,
   IAddAction,
+  ICompletedAction,
   IDeleteAction,
   IReducerAction,
   ITask,
@@ -14,6 +15,7 @@ import { clone } from "./utility";
 
 export const TodoContext = createContext<ITodoContext>({
   activeTasks: [],
+  completedTasks: [],
   dispatch: () => {},
 });
 
@@ -54,6 +56,12 @@ const updateTaskAction = (state: ITodoState, action: IUpdateAction) => {
   return state.activeTasks;
 }
 
+const completedTaskAction = (state: ITodoState, action: ICompletedAction) => {
+  const activeTasks: ITask[] = clone(state.activeTasks);
+  const filteredData = activeTasks.filter((task) => task.id !== action.data.id);
+  return filteredData;
+};
+  
 const reducer = (state: ITodoState, action: IReducerAction) => {
   switch (action.type) {
     case ActionTypeEnum.add:
@@ -63,7 +71,10 @@ const reducer = (state: ITodoState, action: IReducerAction) => {
     case ActionTypeEnum.ToggleFavorite:
       return { ...state, activeTasks: toggleFavoriteAction(state, action) };
       case ActionTypeEnum.Update:
-        return { ...state, activeTasks: updateTaskAction(state, action) };
+      return { ...state, activeTasks: updateTaskAction(state, action) };
+      case ActionTypeEnum.Completed:
+        return { ...state, activeTasks: completedTaskAction(state, action) };
+    
   }
   return { ...state };
 };
@@ -87,11 +98,11 @@ const TodoProvider = (props: Props) => {
     },
   ];
 
-  const data = { activeTasks: tasks };
+  const data: ITodoState = { activeTasks: tasks, completedTasks: [] };
   const [state, dispatch] = useReducer(reducer, data);
 
   return (
-    <TodoContext.Provider value={{ activeTasks: state.activeTasks, dispatch }}>
+    <TodoContext.Provider value={{ activeTasks: state.activeTasks, completedTasks: [], dispatch }}>
       {props.children}
     </TodoContext.Provider>
   );
