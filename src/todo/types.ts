@@ -25,9 +25,10 @@ export enum ActionTypeEnum {
   add,
   delete,
   ToggleFavorite,
+  Update,
 }
 
-export type IReducerAction = IAddAction | IDeleteAction | IToggleFavoriteAction;
+export type IReducerAction = IAddAction | IDeleteAction | IToggleFavoriteAction | IUpdateAction;
 
 export interface IAddAction {
   type: ActionTypeEnum.add;
@@ -42,4 +43,9 @@ export interface IDeleteAction {
 export interface IToggleFavoriteAction {
   type: ActionTypeEnum.ToggleFavorite;
   data: { id: string };
+}
+
+export interface IUpdateAction {
+  type: ActionTypeEnum.Update;
+  data: ITask;
 }

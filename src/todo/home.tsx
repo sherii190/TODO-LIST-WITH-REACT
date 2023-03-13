@@ -30,6 +30,9 @@ const Home = () => {
             selectedKey={String(selectedKey)}
             styles={{ root: HomeStyle.pivotRoot }}
             onLinkClick={(item?: PivotItem) => {
+              if (item?.props.itemKey !== PivotKeysEnum.taskForm) {
+                setEditTaskId(null);
+              }
               setSelectedKey(item?.props.itemKey || PivotKeysEnum.tasks);
             }}
           >

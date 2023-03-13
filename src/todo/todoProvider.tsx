@@ -8,6 +8,7 @@ import {
   ITodoContext,
   ITodoState,
   IToggleFavoriteAction,
+  IUpdateAction,
 } from "./types";
 import { clone } from "./utility";
 
@@ -44,6 +45,15 @@ const toggleFavoriteAction = (
   return state.activeTasks;
 };
 
+const updateTaskAction = (state: ITodoState, action: IUpdateAction) => {
+  const cloneActiveTasks: ITask [] = (state.activeTasks);
+  const index = cloneActiveTasks.findIndex(x => x.id === action.data.id);
+  if (index >= 0) {
+    cloneActiveTasks[index] = action.data;
+  }
+  return state.activeTasks;
+}
+
 const reducer = (state: ITodoState, action: IReducerAction) => {
   switch (action.type) {
     case ActionTypeEnum.add:
@@ -52,6 +62,8 @@ const reducer = (state: ITodoState, action: IReducerAction) => {
       return { ...state, activeTasks: deleteTaskAction(state, action) };
     case ActionTypeEnum.ToggleFavorite:
       return { ...state, activeTasks: toggleFavoriteAction(state, action) };
+      case ActionTypeEnum.Update:
+        return { ...state, activeTasks: updateTaskAction(state, action) };
   }
   return { ...state };
 };

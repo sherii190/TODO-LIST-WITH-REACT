@@ -9,6 +9,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { TodoContext } from "../todoProvider";
 import { ActionTypeEnum, ITask } from "../types";
 import useInput from "./useInputs";
+import todoString from "../string.json";
 
 type Props = {
   editTaskId: string | null;
@@ -40,9 +41,7 @@ const TaskForm = ({ editTaskId }: Props) => {
     }
   }, [showMessage.message]);
 
-  const onFormSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-
+  const addTaskAction = () => {
     const data: ITask = {
       id: "",
       title: title.value,
@@ -51,6 +50,32 @@ const TaskForm = ({ editTaskId }: Props) => {
     };
     dispatch({ type: ActionTypeEnum.add, data });
     setShowMessage({ type: MessageBarType.success, message: "Task Added" });
+    title.set("");
+    description.set("");
+  };
+
+  const updateTaskAction = () => {
+    const taskData = activeTasks.find((task) => task.id === editTaskId);
+    if (taskData) {
+      const data: ITask = {
+        id: taskData.id || "",
+        title: title.value,
+        description: description.value,
+        isFave: taskData.isFave || false,
+      };
+      dispatch({ type: ActionTypeEnum.Update, data });
+      setShowMessage({ type: MessageBarType.success, message: "Task Updated" });
+    } else {
+      setShowMessage({
+        type: MessageBarType.error,
+        message: "Error while updating task",
+      });
+    }
+  };
+  const onFormSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    editTaskId ? updateTaskAction() : addTaskAction();
   };
   return (
     <form onSubmit={onFormSubmit}>
@@ -61,13 +86,16 @@ const TaskForm = ({ editTaskId }: Props) => {
         <Stack style={{ width: "80%" }}>
           {showMessage.message && (
             <MessageBar messageBarType={MessageBarType.success}>
-              Task Added
+              {showMessage.message}
             </MessageBar>
           )}
         </Stack>
 
         <Stack style={{ width: "20%" }}>
-          <PrimaryButton type="submit" text="Add Task" />
+          <PrimaryButton
+            type="submit"
+            text={editTaskId ? todoString.updateTaskbtn : todoString.addTaskBtn}
+          />
         </Stack>
       </Stack>
     </form>
