@@ -8,6 +8,7 @@ import { ITask, PivotKeysEnum } from "./types";
 import { initializeIcons } from "@fluentui/font-icons-mdl2";
 import TodoProvider from "./todoProvider";
 import TaskForm from "./taskForm/taskForm";
+import CompletedTaskList from "./list/CompletedTaskList";
 initializeIcons();
 
 const Home = () => {
@@ -54,7 +55,7 @@ const Home = () => {
               headerText={todoString.pivots.compleatedTaskTab}
               itemKey={PivotKeysEnum.Completed}
             >
-              <Label>Pivot #3</Label>
+              <CompletedTaskList />
             </PivotItem>
           </Pivot>
         </Stack>

@@ -29,6 +29,7 @@ export enum ActionTypeEnum {
   ToggleFavorite,
   Update,
   Completed,
+  deleteCompletedTask,
 }
 
 export type IReducerAction =
@@ -44,7 +45,7 @@ export interface IAddAction {
 }
 
 export interface IDeleteAction {
-  type: ActionTypeEnum.delete;
+  type: ActionTypeEnum.delete | ActionTypeEnum.deleteCompletedTask;
   data: { id: string };
 }
 

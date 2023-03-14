@@ -1,4 +1,10 @@
-import { Checkbox, FontIcon, mergeStyles, Stack } from "@fluentui/react";
+import {
+  Checkbox,
+  FontIcon,
+  mergeStyles,
+  MessageBar,
+  Stack,
+} from "@fluentui/react";
 import React, { useContext } from "react";
 import { TodoContext } from "../todoProvider";
 import { ActionTypeEnum, ITask } from "../types";
@@ -64,7 +70,15 @@ const TaskList = ({ setEditTask }: Props) => {
       </Stack>
     );
   };
-  return <div>{activeTasks.map(onRenderCell)}</div>;
+  return (
+    <div>
+      {activeTasks.length ? (
+        activeTasks.map(onRenderCell)
+      ) : (
+        <MessageBar> Good job, you have done all the tasks. </MessageBar>
+      )}
+    </div>
+  );
 };
 
 export default TaskList;

@@ -6,7 +6,7 @@ import TaskListStyle from "./taskList.style";
 type Props = {
   task: ITask;
 };
-const taskDescription = ({ task }: Props) => {
+const TaskDescription = ({ task }: Props) => {
   const buttonId = useId("targetButton");
   const [teachingBubbleVisible, { toggle: toggleTeachingBubbleVisible }] =
     useBoolean(false);
@@ -36,4 +36,4 @@ const taskDescription = ({ task }: Props) => {
   );
 };
 
-export default taskDescription;
+export default TaskDescription;
